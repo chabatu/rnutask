@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Formlar</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><b>📝 İletişim Formu</b></h1>
+            <marquee>Tüm form elemanlarını test edin!</marquee>
+        </header>
+        
+        <nav>
+            <a href="index.html" class="nav-btn">🏠 Ana Sayfa</a>
+            <a href="multimedia.html" class="nav-btn">🎨 Multimedya</a>
+            <a href="lists.html" class="nav-btn">📋 Listeler</a>
+            <a href="tables.html" class="nav-btn">📊 Tablolar</a>
+            <a href="frames.html" class="nav-btn">🖼️ Çerçeveler</a>
+        </nav>
+        
+        <div class="content">
+            <form>
+                <div class="demo-section">
+                    <label>👤 Ad Soyad:</label>
+                    <input type="text" name="name" placeholder="Adınızı girin..." required>
+                </div>
+                
+                <div class="demo-section">
+                    <label>🔒 Şifre:</label>
+                    <input type="password" name="password" placeholder="Şifrenizi girin...">
+                </div>
+                
+                <div class="demo-section">
+                    <label>⚤ Cinsiyet:</label>
+                    <label><input type="radio" name="gender" value="male"> Erkek</label>
+                    <label><input type="radio" name="gender" value="female"> Kadın</label>
+                    <label><input type="radio" name="gender" value="other"> Diğer</label>
+                </div>
+                
+                <div class="demo-section">
+                    <label>🎯 Hobiler:</label>
+                    <label><input type="checkbox" name="hobby" value="reading"> 📚 Okuma</label>
+                    <label><input type="checkbox" name="hobby" value="sports"> ⚽ Spor</label>
+                    <label><input type="checkbox" name="hobby" value="music"> 🎵 Müzik</label>
+                </div>
+                
+                <div class="demo-section">
+                    <label>🌍 Ülke:</label>
+                    <select name="country">
+                        <option value="tr">Türkiye</option>
+                        <option value="lv">Letonya</option>
+                        <option value="usa">ABD</option>
+                        <option value="de">Almanya</option>
+                    </select>
+                </div>
+                
+                <div class="demo-section">
+                    <label>💬 Mesaj:</label>
+                    <textarea name="message" rows="6" placeholder="Mesajınızı yazın..."></textarea>
+                </div>
+                
+                <div class="demo-section">
+                    <label>📎 Dosya Yükle:</label>
+                    <input type="file" name="file">
+                </div>
+                
+                <div class="form-buttons">
+                    <input type="submit" value="🚀 Gönder">
+                    <input type="reset" value="🔄 Temizle">
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
