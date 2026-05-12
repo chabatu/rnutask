@@ -1,210 +1,452 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <title>JS Functions and Forms</title>
-    <style>
-        body { font-family: sans-serif; background: #f4f4f9; padding: 20px; }
-        .container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        section { border-bottom: 1px solid #ddd; padding: 15px 0; }
-        h3 { color: #333; font-size: 1.1rem; }
-        .output { background: #e9ecef; padding: 10px; margin-top: 10px; border-radius: 4px; min-height: 20px; color: #d63384; font-weight: bold; }
-        input, select, button { padding: 8px; margin: 5px 0; border: 1px solid #ccc; border-radius: 4px; }
-        button { cursor: pointer; background: #007bff; color: white; border: none; }
-        button:hover { background: #0056b3; }
-        .timer-display { font-size: 1.5rem; color: #222; }
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>JavaScript Playground by Chabatu</title>
+
+<style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+    }
+    body{
+        font-family: "Segoe UI", sans-serif;
+        background:
+            radial-gradient(circle at top left,#1e293b,#0f172a 55%);
+        min-height:100vh;
+        color:#f8fafc;
+        padding:40px 20px;
+    }
+    .app{
+        max-width:1100px;
+        margin:auto;
+    }
+    .hero{
+        text-align:center;
+        margin-bottom:35px;
+    }
+    .hero h1{
+        font-size:2.5rem;
+        margin-bottom:10px;
+        letter-spacing:1px;
+    }
+    .hero p{
+        color:#94a3b8;
+    }
+    .grid{
+        display:grid;
+        grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+        gap:22px;
+    }
+    .card{
+        background:rgba(15,23,42,.85);
+        border:1px solid rgba(255,255,255,.08);
+        backdrop-filter:blur(10px);
+        border-radius:22px;
+        padding:22px;
+        box-shadow:
+            0 10px 25px rgba(0,0,0,.25);
+        transition:.3s;
+    }
+    .card:hover{
+        transform:translateY(-4px);
+        border-color:#38bdf8;
+    }
+    .card h2{
+        font-size:1.1rem;
+        margin-bottom:16px;
+        color:#38bdf8;
+    }
+    .card p{
+        color:#94a3b8;
+        font-size:.95rem;
+        margin-bottom:12px;
+        line-height:1.5;
+    }
+    input,
+    select,
+    button{
+        width:100%;
+        border:none;
+        outline:none;
+        border-radius:12px;
+        padding:12px 14px;
+        margin-top:10px;
+        font-size:.95rem;
+    }
+    input,
+    select{
+        background:#1e293b;
+        color:white;
+        border:1px solid #334155;
+    }
+    input::placeholder{
+        color:#94a3b8;
+    }
+    button{
+        cursor:pointer;
+        background:linear-gradient(135deg,#06b6d4,#3b82f6);
+        color:white;
+        font-weight:600;
+        transition:.25s;
+    }
+    button:hover{
+        opacity:.9;
+        transform:scale(.99);
+    }
+    .button-group{
+        display:grid;
+        gap:10px;
+        margin-top:10px;
+    }
+    .output{
+        margin-top:16px;
+        background:#020617;
+        border:1px solid #1e293b;
+        color:#facc15;
+        border-radius:14px;
+        padding:14px;
+        min-height:55px;
+        line-height:1.6;
+        word-break:break-word;
+    }
+    .timer-box{
+        text-align:center;
+    }
+    .timer{
+        font-size:4rem;
+        font-weight:bold;
+        margin:15px 0;
+        color:#22c55e;
+    }
+    .timer-buttons{
+        display:grid;
+        grid-template-columns:repeat(3,1fr);
+        gap:10px;
+    }
+    .warning{
+        background:linear-gradient(135deg,#f59e0b,#f97316);
+        color:white;
+        cursor:pointer;
+    }
+    .warning p{
+        color:white;
+    }
+    .footer{
+        text-align:center;
+        margin-top:40px;
+        color:#64748b;
+        font-size:.9rem;
+    }
+    @media(max-width:600px){
+        .hero h1{
+            font-size:1.8rem;
+        }
+        .timer{
+            font-size:3rem;
+        }
+    }
+</style>
 </head>
 <body>
-
-<div class="container">
-    <h2>JavaScript Lab by Batuhan Karakaya</h2>
-
-    <section>
-        <h3>1–5: String & Sentence Operations</h3>
-        <input type="text" id="strInput" placeholder="Type a sentence..." value="Hello World, JavaScript is so much fun">
-        <div class="buttons">
-            <button onclick="reverseWords()">Reverse Words</button>
-            <button onclick="extractChars()">1st, 3rd, 4th and Last Character</button>
-            <button onclick="findLongest()">Longest Word</button>
-            <button onclick="toggleCase()">Toggle Case (A/a)</button>
-            <button onclick="counts()">Word & Space Count</button>
+<div class="app">
+    <div class="hero">
+        <h1>JavaScript Interactive Lab</h1>
+    </div>
+    <div class="grid">
+        <div class="card">
+            <h2>1–5 String Operations</h2>
+            <input type="text"
+                   id="strInput"
+                   value="Hello World, JavaScript is so much fun"
+                   placeholder="Write something...">
+            <div class="button-group">
+                <button onclick="reverseWords()">Reverse Words</button>
+                <button onclick="extractChars()">Extract Characters</button>
+                <button onclick="findLongest()">Longest Word</button>
+                <button onclick="toggleCase()">Toggle Case</button>
+                <button onclick="counts()">Word & Space Count</button>
+            </div>
+            <div id="strOutput" class="output">
+                Results will appear here...
+            </div>
         </div>
-        <div id="strOutput" class="output">The result will appear here...</div>
-    </section>
+        <div class="card">
+            <h2>6–10 Array Operations</h2>
+            <div class="button-group">
+                <button onclick="showThirdFruit()">Show 3rd Fruit</button>
+                <button onclick="removeDupes()">Remove Duplicates</button>
+                <button onclick="lastElementPop()">Last Element</button>
+            </div>
+            <input type="text"
+                   id="indexInput"
+                   placeholder="Find fruit index">
+            <button onclick="findIndex()">Find Index</button>
+            <button onclick="spliceOneByOne()">
+                Delete One By One
+            </button>
+            <div id="arrayOutput" class="output">
+                Array: [Apple, Pear, Banana, Strawberry]
+            </div>
+        </div>
+        <div class="card">
+            <h2>11–12 Calculator</h2>
+            <input type="number"
+                   id="num1"
+                   placeholder="Enter number">
+            <select id="opChoice">
+                <option value="add">+10</option>
+                <option value="sub">-10</option>
+            </select>
+            <button onclick="calcChoice()">Calculate</button>
+            <button onclick="popupArithmetic()">
+                Special Popup Rule
+            </button>
+            <div id="calcOutput" class="output"></div>
+        </div>
+        <div class="card">
+            <h2>13–17 Registration Form</h2>
+            <form id="signupForm">
+                <input type="text"
+                       id="username"
+                       placeholder="Name Surname"
+                       required>
+                <input type="number"
+                       id="age"
+                       placeholder="Age">
+                <button type="submit">Register</button>
+                <button type="reset" onclick="clearOutput()">
+                    Reset Form
+                </button>
+            </form>
+            <div id="formOutput" class="output"></div>
+        </div>
+        <div class="card">
+            <h2>18 People List</h2>
+            <p>Array of objects example</p>
+            <button onclick="displayPersons()">
+                Show Persons
+            </button>
+            <div id="personOutput" class="output"></div>
+        </div>
+        <div class="card timer-box">
+            <h2>19 Countdown Timer</h2>
+            <div class="timer" id="timer">10</div>
+            <div class="timer-buttons">
+                <button onclick="startTimer()">Start</button>
+                <button onclick="pauseTimer()">Pause</button>
+                <button onclick="resetTimer()">Reset</button>
+            </div>
+        </div>
+        <div class="card warning"
+             ondblclick="clearTaskArea()">
+            <h2>20 Double Click Area</h2>
+            <p>
+                Double click this area to clear all outputs instantly.
+            </p>
+        </div>
+    </div>
+    <div class="footer">
+        Chabatu UI • All copyrighted.
+    </div>
 
-    <section>
-        <h3>6–10: Array Operations</h3>
-        <button onclick="showThirdFruit()">Fruits (3rd item)</button>
-        <button onclick="removeDupes()">Remove Duplicates ([1,2,2,3])</button>
-        <button onclick="lastElementPop()">Last Item (Pop-up)</button>
-        <input type="text" id="indexInput" placeholder="Find Fruites">
-        <button onclick="findIndex()">Find Index</button>
-        <button onclick="spliceOneByOne()">Splice: Delete One by One</button>
-        <div id="arrayOutput" class="output">Series: [Apple, Pear, Banana, Strawberry]</div>
-    </section>
-
-    <section>
-        <h3>11–12: Functions & Selective Arithmetic</h3>
-        <input type="number" id="num1" placeholder="...">
-        <select id="opChoice">
-            <option value="add">+</option>
-            <option value="sub">-</option>
-        </select>
-        <button onclick="calcChoice()">Calculate</button>
-        <button onclick="popupArithmetic()">Special Rule (Pop-up)</button>
-        <div id="calcOutput" class="output"></div>
-    </section>
-
-    <section>
-        <h3>13–17: Registration Form</h3>
-        <form id="signupForm">
-            <input type="text" id="username" placeholder="First Name, Surname (Required)" required>
-            <input type="number" id="age" placeholder="Age">
-            <button type="submit">Sign up</button>
-            <button type="reset" onclick="clearOutput()">Reset</button>
-        </form>
-        <div id="formOutput" class="output"></div>
-    </section>
-
-    <section>
-        <h3>18: List of People (Array of Objects)</h3>
-        <button onclick="displayPersons()">Show People</button>
-        <div id="personOutput" class="output"></div>
-    </section>
-
-    <section>
-        <h3>19: Countdown Timer</h3>
-        <div class="timer-display" id="timer">10</div>
-        <button onclick="startTimer()">Start</button>
-        <button onclick="pauseTimer()">Pause</button>
-        <button onclick="resetTimer()">Reset</button>
-    </section>
-
-    <section id="taskArea" ondblclick="clearTaskArea()" style="cursor:help; background: #fff3cd; padding: 10px;">
-        <h3>20: Double-Click Area</h3>
-        <p>You can clear all results by <strong>double-clicking</strong> this yellow area.</p>
-    </section>
 </div>
-
 <script>
     function reverseWords() {
         let val = document.getElementById('strInput').value;
-        document.getElementById('strOutput').innerText = val.split(' ').reverse().join(' ');
+        document.getElementById('strOutput').innerText =
+            val.split(' ').reverse().join(' ');
     }
-
     function extractChars() {
         let val = document.getElementById('strInput').value;
-        if(val.length < 4) return alert("The text is far too short!");
-        let result = `1.: ${val[0]}, 3.: ${val[2]}, 4.: ${val[3]}, End: ${val[val.length-1]}`;
+
+        if (val.length < 4)
+            return alert("The text is too short!");
+        let result =
+            `1: ${val[0]}
+3: ${val[2]}
+4: ${val[3]}
+Last: ${val[val.length - 1]}`;
         document.getElementById('strOutput').innerText = result;
     }
-
     function findLongest() {
-        let words = document.getElementById('strInput').value.split(' ');
-        let longest = words.reduce((a, b) => a.length >= b.length ? a : b);
-        document.getElementById('strOutput').innerText = "Longest: " + longest;
+        let words =
+            document.getElementById('strInput')
+            .value.split(' ');
+        let longest =
+            words.reduce((a, b) =>
+                a.length >= b.length ? a : b);
+        document.getElementById('strOutput').innerText =
+            "Longest Word: " + longest;
     }
-
     function toggleCase() {
-        let val = document.getElementById('strInput').value;
-        let toggled = val.split('').map(c => c === c.toUpperCase() ? c.toLowerCase() : c.toUpperCase()).join('');
-        document.getElementById('strOutput').innerText = toggled;
+        let val =
+            document.getElementById('strInput').value;
+        let toggled =
+            val.split('')
+            .map(c =>
+                c === c.toUpperCase()
+                ? c.toLowerCase()
+                : c.toUpperCase()
+            )
+            .join('');
+        document.getElementById('strOutput').innerText =
+            toggled;
     }
-
     function counts() {
-        let val = document.getElementById('strInput').value;
-        let words = val.trim().split(/\s+/).length;
-        let spaces = val.split(" ").length - 1;
-        document.getElementById('strOutput').innerText = `Word: ${words}, Space: ${spaces}`;
+        let val =
+            document.getElementById('strInput').value;
+        let words =
+            val.trim().split(/\s+/).length;
+        let spaces =
+            val.split(" ").length - 1;
+        document.getElementById('strOutput').innerText =
+            `Words: ${words} | Spaces: ${spaces}`;
     }
-
-    let fruits = ["Apple", "Pear", "Banana", "Strawberry"];
-    
+    let fruits =
+        ["Apple", "Pear", "Banana", "Strawberry"];
     function showThirdFruit() {
-        document.getElementById('arrayOutput').innerText = "3. Element: " + fruits[2];
+        document.getElementById('arrayOutput').innerText =
+            "3rd Fruit: " + fruits[2];
     }
-
     function removeDupes() {
-        let unique = [...new Set([1, 2, 2, 3, 4, 4, 5])];
-        document.getElementById('arrayOutput').innerText = "Unique: " + unique.join(', ');
+        let unique =
+            [...new Set([1,2,2,3,4,4,5])];
+
+        document.getElementById('arrayOutput').innerText =
+            unique.join(', ');
     }
 
     function lastElementPop() {
-        alert("Last Element: " + fruits[fruits.length - 1]);
+        alert(
+            "Last Element: " +
+            fruits[fruits.length - 1]
+        );
     }
-
-    function findIndex() {
-        let input = document.getElementById('indexInput').value;
-        let idx = fruits.indexOf(input);
-        document.getElementById('arrayOutput').innerText = idx !== -1 ? `Index: ${idx}` : "Couldn't Find";
-    }
-
+function findIndex() {
+    let input =
+        document.getElementById('indexInput')
+        .value
+        .trim()
+        .toLowerCase();
+    let idx =
+        fruits.findIndex(fruit =>
+            fruit.toLowerCase() === input
+        );
+    document.getElementById('arrayOutput').innerText =
+        idx !== -1
+        ? `Index: ${idx}`
+        : "Fruit not found";
+}
     function spliceOneByOne() {
-        if(fruits.length > 0) {
-            fruits.splice(0, 1);
-            document.getElementById('arrayOutput').innerText = "Remaining: " + fruits.join(', ');
+
+        if (fruits.length > 0) {
+
+            fruits.splice(0,1);
+
+            document.getElementById('arrayOutput').innerText =
+                "Remaining: " + fruits.join(', ');
+
         } else {
-            alert("The queue is empty!");
+            alert("Array is empty!");
         }
     }
-
     function calcChoice() {
-        let n1 = Number(document.getElementById('num1').value);
-        let op = document.getElementById('opChoice').value;
-        let res = (op === 'add') ? n1 + 10 : n1 - 10;
-        document.getElementById('calcOutput').innerText = "Result (out of 10): " + res;
+        let n1 =
+            Number(document.getElementById('num1').value);
+        let op =
+            document.getElementById('opChoice').value;
+        let res =
+            (op === 'add')
+            ? n1 + 10
+            : n1 - 10;
+        document.getElementById('calcOutput').innerText =
+            "Result: " + res;
     }
-
     function popupArithmetic() {
-        let val = prompt("Enter a number or some text:");
-        if(!isNaN(val)) alert("Square: " + (val * val));
-        else alert("The text you entered: " + val.toUpperCase());
+        let val =
+            prompt("Enter text or number:");
+        if (!isNaN(val)) {
+            alert("Square: " + (val * val));
+        } else {
+            alert(
+                "UPPERCASE: " +
+                val.toUpperCase()
+            );
+        }
     }
+    document.getElementById('signupForm')
+    .onsubmit = function(e){
 
-    document.getElementById('signupForm').onsubmit = function(e) {
         e.preventDefault();
-        let name = document.getElementById('username').value;
-        let age = document.getElementById('age').value;
-
-        if(age < 18) {
-            alert("You must be at least 18 years old!");
+        let name =
+            document.getElementById('username').value;
+        let age =
+            document.getElementById('age').value;
+        if (age < 18) {
+            alert("You must be 18+");
             return;
         }
-
-        document.getElementById('formOutput').innerHTML = `<span style="color:green">Saved successfully!</span><br>Name: ${name}, Age: ${age}`;
+        document.getElementById('formOutput').innerHTML =
+            `<span style="color:#22c55e">
+                Registration successful!
+            </span>
+            <br>
+            Name: ${name}
+            <br>
+            Age: ${age}`;
     };
-
     function clearOutput() {
         document.getElementById('formOutput').innerText = "";
     }
-
     function displayPersons() {
-        let persons = [
-            {id: 1, name: "Amit"},
-            {id: 2, name: "Batuhan"},
-            {id: 3, name: "Karsan"}
-        ];
-        document.getElementById('personOutput').innerText = persons.map(p => `${p.id}: ${p.name}`).join(' | ');
-    }
 
+        let persons = [
+            {id:1, name:"Amit"},
+            {id:2, name:"Batuhan"},
+            {id:3, name:"Karsan"}
+        ];
+
+        document.getElementById('personOutput').innerText =
+            persons
+            .map(p => `${p.id} - ${p.name}`)
+            .join(' | ');
+    }
     let timeLeft = 10;
     let timerId = null;
 
     function startTimer() {
-        if(timerId) return;
+
+        if (timerId) return;
         timerId = setInterval(() => {
-            if(timeLeft <= 0) { clearInterval(timerId); alert("Time's up!"); }
-            else { timeLeft--; document.getElementById('timer').innerText = timeLeft; }
-        }, 1000);
+            if (timeLeft <= 0) {
+                clearInterval(timerId);
+                timerId = null;
+                alert("Time is up!");
+            } else {
+                timeLeft--;
+                document.getElementById('timer').innerText =
+                    timeLeft;
+            }
+        },1000);
     }
-
-    function pauseTimer() { clearInterval(timerId); timerId = null; }
-    function resetTimer() { pauseTimer(); timeLeft = 10; document.getElementById('timer').innerText = timeLeft; }
-
+    function pauseTimer() {
+        clearInterval(timerId);
+        timerId = null;
+    }
+    function resetTimer() {
+        pauseTimer();
+        timeLeft = 10;
+        document.getElementById('timer').innerText =
+            timeLeft;
+    }
     function clearTaskArea() {
-        document.querySelectorAll('.output').forEach(el => el.innerText = "");
-        alert("All output has been cleared!");
+
+        document.querySelectorAll('.output')
+        .forEach(el => el.innerText = "");
+        alert("All outputs cleared!");
     }
 </script>
 </body>
